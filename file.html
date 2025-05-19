@@ -7,105 +7,700 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <style>
-    html,body{height:100%;background:#f5f6f8}
-    .navbar-brand{font-size:1.2rem;font-weight:600;letter-spacing:.03em;}
-    h6{font-weight:600;margin-top:2rem;color:#0d6efd;}
-    .action-tile{width:9rem;height:9rem;border:1px solid #dee2e6;border-radius:.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:all .15s;background:#f8f9fa}
-    .action-tile:hover{background:#0d6efd;color:#fff;border-color:#0d6efd;cursor:pointer}
-    .action-tile i{font-size:2.8rem;margin-bottom:.5rem}
-    .table-responsive{margin-top:1rem;}
+    :root {
+      --primary-color: #212529;
+      --secondary-color: #6c757d;
+      --background-color: #f8f9fa;
+      --card-shadow: 0 2px 4px rgba(0,0,0,.08);
+      --hover-shadow: 0 4px 12px rgba(0,0,0,.15);
+      --border-color: #dee2e6;
+    }
+    
+    html, body {
+      height: 100%;
+      background: var(--background-color);
+      color: #212529;
+    }
+    
+    .navbar {
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.9) !important;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .navbar-brand {
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: .03em;
+      color: var(--primary-color);
+    }
+    
+    h6 {
+      font-weight: 600;
+      margin-top: 2rem;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .action-tile {
+      width: 9rem;
+      height: 9rem;
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: all 0.3s ease;
+      background: #fff;
+      box-shadow: var(--card-shadow);
+    }
+    
+    .action-tile:hover {
+      background: var(--primary-color);
+      color: #fff;
+      border-color: var(--primary-color);
+      cursor: pointer;
+      transform: translateY(-3px);
+      box-shadow: var(--hover-shadow);
+    }
+    
+    .action-tile i {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .table-responsive {
+      margin-top: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: var(--card-shadow);
+      background: #fff;
+      border: 1px solid var(--border-color);
+    }
+    
+    .table {
+      margin-bottom: 0;
+    }
+    
+    .table thead th {
+      background: #f8f9fa;
+      border-bottom: 2px solid var(--border-color);
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+    
+    .table tbody tr {
+      transition: background-color 0.2s;
+    }
+    
+    .table tbody tr:hover {
+      background-color: #e9ecef;
+    }
+    
+    .btn-link {
+      color: var(--secondary-color);
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+    
+    .btn-link:hover {
+      color: var(--primary-color);
+    }
+
+    .btn-outline-primary {
+      --bs-btn-color: var(--primary-color);
+      --bs-btn-border-color: var(--primary-color);
+      --bs-btn-hover-color: #fff;
+      --bs-btn-hover-bg: var(--primary-color);
+      --bs-btn-hover-border-color: var(--primary-color);
+      --bs-btn-active-color: #fff;
+      --bs-btn-active-bg: var(--primary-color);
+      --bs-btn-active-border-color: var(--primary-color);
+      --bs-btn-disabled-color: var(--primary-color);
+      --bs-btn-disabled-bg: transparent;
+    }
+
+    .btn-primary {
+      --bs-btn-color: #fff;
+      --bs-btn-bg: var(--primary-color);
+      --bs-btn-border-color: var(--primary-color);
+      --bs-btn-hover-color: #fff;
+      --bs-btn-hover-bg: #1c1f23;
+      --bs-btn-hover-border-color: #1a1d20;
+      --bs-btn-active-color: #fff;
+      --bs-btn-active-bg: #1a1d20;
+      --bs-btn-active-border-color: #1a1d20;
+    }
+    
+    .document-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .document-actions .btn {
+      padding: 0.25rem 0.5rem;
+    }
+    
+    .form-control, .form-select {
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 0.75rem;
+    }
+    
+    .form-control:focus, .form-select:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.2rem rgba(33,37,41,.25);
+    }
+
+    .dropdown-item:active {
+      background-color: var(--primary-color);
+      color: #fff;
+    }
+    
     @media (max-width: 575px) {
-      .action-tile{width:100%;height:6rem;font-size:1rem;}
-      .table-responsive{font-size:.95rem;}
+      .action-tile {
+        width: 100%;
+        height: 6rem;
+        font-size: 1rem;
+      }
+      .table-responsive {
+        font-size: 0.95rem;
+      }
+      .document-actions {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- barre supérieure -->
   <header class="navbar navbar-light bg-white shadow-sm px-3 sticky-top mb-3">
-    <a class="navbar-brand fw-bold" href="liste-dossiers.html"><i class="bi bi-arrow-left me-2"></i>Dossier #12345 – ABC inc.</a>
-    <button class="btn btn-outline-primary d-none d-sm-block"><i class="bi bi-person-circle me-1"></i>Compte</button>
+    <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-arrow-left me-2"></i>Dossier #12345 – ABC inc.</a>
+    <button class="btn btn-outline-primary d-none d-sm-block" onclick="showAccountModal()"><i class="bi bi-person-circle me-1"></i>Compte</button>
   </header>
+  
   <div class="container py-3 pb-5">
     <!-- DESCRIPTION -->
-    <h6>Description</h6>
+    <h6><i class="bi bi-info-circle"></i>Description</h6>
     <textarea class="form-control mb-3" rows="3" readonly>L'Agence du revenu du Canada (ARC) a procédé à une vérification des déclarations fiscales de ABC inc. pour les années 2012 à 2014. L'ARC conteste la déductibilité de certaines dépenses et réclame des montants additionnels. Un avis de cotisation a été émis, que la société souhaite contester. Le dossier implique l'analyse de la législation fiscale pertinente, la préparation d'une opposition et la gestion de plusieurs documents justificatifs.</textarea>
+    
     <!-- ARTICLES DE LOI -->
-    <h6>Articles de loi</h6>
+    <h6><i class="bi bi-book"></i>Articles de loi</h6>
     <ul class="mb-3 ps-3">
       <li>Article 18(1)a) LIR – Déductibilité des dépenses</li>
       <li>Article 152(3.1) LIR – Avis de cotisation</li>
       <li>Article 165(1) LIR – Opposition à une cotisation</li>
       <li>Article 69 LIR – Transactions non à la juste valeur marchande</li>
     </ul>
+    
     <!-- INSTRUCTIONS PARTICULIÈRES -->
-    <h6>Instructions particulières</h6>
+    <h6><i class="bi bi-list-check"></i>Instructions particulières</h6>
     <textarea class="form-control mb-3" rows="3" readonly>1. Vérifier la légitimité des dépenses contestées.
 2. Préparer un projet de lettre d'opposition.
 3. S'assurer que tous les documents justificatifs sont joints.
 4. Mettre en évidence les points faibles de la position de l'ARC.
 5. Générer un rapport synthétique pour le client.</textarea>
+    
     <!-- DOCUMENTS JOINTS -->
     <div class="d-flex justify-content-between align-items-center mt-4 mb-2">
-      <h6 class="m-0">Documents joints</h6>
+      <h6 class="m-0"><i class="bi bi-files"></i>Documents joints</h6>
       <div class="dropdown">
-        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-plus-lg me-1"></i>Ajouter</button>
+        <button class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="bi bi-plus-lg me-1"></i>Ajouter
+        </button>
         <ul class="dropdown-menu dropdown-menu-end">
-          <li><label class="dropdown-item" for="uploadFile"><i class="bi bi-upload me-2"></i>Téléverser un fichier</label></li>
-          <li><a class="dropdown-item" href="#"><i class="bi bi-link-45deg me-2"></i>Ajouter un lien externe</a></li>
+          <li>
+            <a class="dropdown-item" href="#" onclick="showCreateDocumentModal()">
+              <i class="bi bi-upload me-2"></i>Téléverser un fichier
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#" onclick="showAddLinkModal()">
+              <i class="bi bi-link-45deg me-2"></i>Ajouter un lien externe
+            </a>
+          </li>
         </ul>
       </div>
     </div>
-    <input type="file" id="uploadFile" hidden>
+    
+    <input type="file" id="uploadFileMaster" hidden accept=".pdf,.doc,.docx,.xls,.xlsx,.eml,.zip,.txt,.jpg,.png">
     <div class="table-responsive">
       <table class="table table-sm align-middle">
-        <thead class="table-light">
+        <thead>
           <tr>
             <th>Nom du fichier</th>
             <th>Taille</th>
             <th>Date</th>
-            <th></th>
+            <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
-          <tr><td>Déclaration fiscale T1 – 2012.pdf</td><td>320 KB</td><td>12‑03‑2013</td><td><button class="btn btn-link btn-sm"><i class="bi bi-download"></i></button></td></tr>
-          <tr><td>Déclaration fiscale T1 – 2013.pdf</td><td>315 KB</td><td>10‑03‑2014</td><td><button class="btn btn-link btn-sm"><i class="bi bi-download"></i></button></td></tr>
-          <tr><td>Déclaration fiscale T1 – 2014.pdf</td><td>318 KB</td><td>11‑03‑2015</td><td><button class="btn btn-link btn-sm"><i class="bi bi-download"></i></button></td></tr>
-          <tr><td>Avis de cotisation – 2012.pdf</td><td>210 KB</td><td>20‑04‑2013</td><td><button class="btn btn-link btn-sm"><i class="bi bi-download"></i></button></td></tr>
-          <tr><td>Avis de cotisation – 2013.pdf</td><td>208 KB</td><td>18‑04‑2014</td><td><button class="btn btn-link btn-sm"><i class="bi bi-download"></i></button></td></tr>
-          <tr><td>Avis de cotisation – 2014.pdf</td><td>212 KB</td><td>19‑04‑2015</td><td><button class="btn btn-link btn-sm"><i class="bi bi-download"></i></button></td></tr>
-          <tr><td>Rapport de vérification ARC.pdf</td><td>410 KB</td><td>05‑02‑2016</td><td><button class="btn btn-link btn-sm"><i class="bi bi-download"></i></button></td></tr>
-          <tr><td>Fichier calcul maison.xlsx</td><td>95 KB</td><td>22‑02‑2016</td><td><button class="btn btn-link btn-sm"><i class="bi bi-download"></i></button></td></tr>
-          <tr><td>Fichier calcul ARC.xlsx</td><td>98 KB</td><td>23‑02‑2016</td><td><button class="btn btn-link btn-sm"><i class="bi bi-download"></i></button></td></tr>
-          <tr><td>Courriel client – 15-03-2016.eml</td><td>12 KB</td><td>15‑03‑2016</td><td><button class="btn btn-link btn-sm"><i class="bi bi-download"></i></button></td></tr>
-          <tr><td>Lettre d'opposition (brouillon).docx</td><td>45 KB</td><td>25‑03‑2016</td><td><button class="btn btn-link btn-sm"><i class="bi bi-download"></i></button></td></tr>
-          <tr><td>Autres pièces justificatives.zip</td><td>1.2 MB</td><td>28‑03‑2016</td><td><button class="btn btn-link btn-sm"><i class="bi bi-download"></i></button></td></tr>
+        <tbody id="documentsTable">
+          <tr>
+            <td>Déclaration fiscale T1 – 2012.pdf</td>
+            <td>320 KB</td>
+            <td>12‑03‑2013</td>
+            <td>
+              <div class="document-actions">
+                <button class="btn btn-link btn-sm" onclick="downloadDocument(this)" title="Télécharger">
+                  <i class="bi bi-download"></i>
+                </button>
+                <button class="btn btn-link btn-sm" onclick="editDocument(this)" title="Modifier">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-link btn-sm text-danger" onclick="deleteDocument(this)" title="Supprimer">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Déclaration fiscale T1 – 2013.pdf</td>
+            <td>315 KB</td>
+            <td>10‑03‑2014</td>
+            <td>
+              <div class="document-actions">
+                <button class="btn btn-link btn-sm" onclick="downloadDocument(this)" title="Télécharger">
+                  <i class="bi bi-download"></i>
+                </button>
+                <button class="btn btn-link btn-sm" onclick="editDocument(this)" title="Modifier">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-link btn-sm text-danger" onclick="deleteDocument(this)" title="Supprimer">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Avis de cotisation – 2012.pdf</td>
+            <td>210 KB</td>
+            <td>20‑04‑2013</td>
+            <td>
+              <div class="document-actions">
+                <button class="btn btn-link btn-sm" onclick="downloadDocument(this)" title="Télécharger">
+                  <i class="bi bi-download"></i>
+                </button>
+                <button class="btn btn-link btn-sm" onclick="editDocument(this)" title="Modifier">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-link btn-sm text-danger" onclick="deleteDocument(this)" title="Supprimer">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Avis de cotisation – 2013.pdf</td>
+            <td>208 KB</td>
+            <td>18‑04‑2014</td>
+            <td>
+              <div class="document-actions">
+                <button class="btn btn-link btn-sm" onclick="downloadDocument(this)" title="Télécharger">
+                  <i class="bi bi-download"></i>
+                </button>
+                <button class="btn btn-link btn-sm" onclick="editDocument(this)" title="Modifier">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-link btn-sm text-danger" onclick="deleteDocument(this)" title="Supprimer">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Rapport de vérification ARC.pdf</td>
+            <td>410 KB</td>
+            <td>05‑02‑2016</td>
+            <td>
+              <div class="document-actions">
+                <button class="btn btn-link btn-sm" onclick="downloadDocument(this)" title="Télécharger">
+                  <i class="bi bi-download"></i>
+                </button>
+                <button class="btn btn-link btn-sm" onclick="editDocument(this)" title="Modifier">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-link btn-sm text-danger" onclick="deleteDocument(this)" title="Supprimer">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Fichier calcul maison.xlsx</td>
+            <td>95 KB</td>
+            <td>22‑02‑2016</td>
+            <td>
+              <div class="document-actions">
+                <button class="btn btn-link btn-sm" onclick="downloadDocument(this)" title="Télécharger">
+                  <i class="bi bi-download"></i>
+                </button>
+                <button class="btn btn-link btn-sm" onclick="editDocument(this)" title="Modifier">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-link btn-sm text-danger" onclick="deleteDocument(this)" title="Supprimer">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Fichier calcul ARC.xlsx</td>
+            <td>98 KB</td>
+            <td>23‑02‑2016</td>
+            <td>
+              <div class="document-actions">
+                <button class="btn btn-link btn-sm" onclick="downloadDocument(this)" title="Télécharger">
+                  <i class="bi bi-download"></i>
+                </button>
+                <button class="btn btn-link btn-sm" onclick="editDocument(this)" title="Modifier">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-link btn-sm text-danger" onclick="deleteDocument(this)" title="Supprimer">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Courriel client – 15-03-2016.eml</td>
+            <td>12 KB</td>
+            <td>15‑03‑2016</td>
+            <td>
+              <div class="document-actions">
+                <button class="btn btn-link btn-sm" onclick="downloadDocument(this)" title="Télécharger">
+                  <i class="bi bi-download"></i>
+                </button>
+                <button class="btn btn-link btn-sm" onclick="editDocument(this)" title="Modifier">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-link btn-sm text-danger" onclick="deleteDocument(this)" title="Supprimer">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Lettre d'opposition (brouillon).docx</td>
+            <td>45 KB</td>
+            <td>25‑03‑2016</td>
+            <td>
+              <div class="document-actions">
+                <button class="btn btn-link btn-sm" onclick="downloadDocument(this)" title="Télécharger">
+                  <i class="bi bi-download"></i>
+                </button>
+                <button class="btn btn-link btn-sm" onclick="editDocument(this)" title="Modifier">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-link btn-sm text-danger" onclick="deleteDocument(this)" title="Supprimer">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Autres pièces justificatives.zip</td>
+            <td>1.2 MB</td>
+            <td>28‑03‑2016</td>
+            <td>
+              <div class="document-actions">
+                <button class="btn btn-link btn-sm" onclick="downloadDocument(this)" title="Télécharger">
+                  <i class="bi bi-download"></i>
+                </button>
+                <button class="btn btn-link btn-sm" onclick="editDocument(this)" title="Modifier">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-link btn-sm text-danger" onclick="deleteDocument(this)" title="Supprimer">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Notes manuscrites de l'avocat.pdf</td>
+            <td>75 KB</td>
+            <td>02‑04‑2016</td>
+            <td>
+              <div class="document-actions">
+                <button class="btn btn-link btn-sm" onclick="downloadDocument(this)" title="Télécharger">
+                  <i class="bi bi-download"></i>
+                </button>
+                <button class="btn btn-link btn-sm" onclick="editDocument(this)" title="Modifier">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-link btn-sm text-danger" onclick="deleteDocument(this)" title="Supprimer">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
+    
     <!-- GENERER UN DOCUMENT -->
-    <h6 class="mt-4">Générer un document</h6>
-    <div class="d-flex gap-4 flex-wrap">
-      <div class="action-tile" onclick="window.location.href='export-lettre.docx'">
+    <h6 class="mt-4"><i class="bi bi-file-earmark-text"></i>Générer un document</h6>
+    <div class="d-flex gap-3 flex-wrap justify-content-start">
+      <div class="action-tile" onclick="generateDocument('lettre')">
         <i class="bi bi-envelope-fill"></i>
         <span>Lettre</span>
       </div>
-      <div class="action-tile" onclick="window.location.href='export-opposition.docx'">
+      <div class="action-tile" onclick="generateDocument('opposition')">
         <i class="bi bi-file-earmark-text-fill"></i>
         <span>Opposition</span>
       </div>
-      <div class="action-tile" onclick="window.location.href='export-avis.docx'">
+      <div class="action-tile" onclick="generateDocument('avis')">
         <i class="bi bi-journal-text"></i>
         <span>Avis<br>d'appel</span>
       </div>
+      <div class="action-tile" onclick="generateDocument('courriel')">
+        <i class="bi bi-at"></i>
+        <span>Courriel</span>
+      </div>
+      <div class="action-tile" onclick="generateDocument('opinion')">
+        <i class="bi bi-chat-left-text-fill"></i>
+        <span>Opinion</span>
+      </div>
+      <div class="action-tile" onclick="generateDocument('note fiscale')">
+        <i class="bi bi-calculator-fill"></i>
+        <span>Note fiscale</span>
+      </div>
     </div>
   </div>
+
+  <!-- Modal Créer Document -->
+  <div class="modal fade" id="createDocumentModal" tabindex="-1" aria-labelledby="createDocumentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createDocumentModalLabel"><i class="bi bi-file-earmark-plus me-2"></i>Créer un nouveau document</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="createDocumentForm">
+            <div class="row">
+              <div class="col-md-8 mb-3">
+                <label for="docFileName" class="form-label">Nom du fichier</label>
+                <input type="text" class="form-control" id="docFileName" placeholder="Ex: Facture_Client_XYZ.pdf" required>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="docDate" class="form-label">Date du document</label>
+                <input type="date" class="form-control" id="docDate" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="docCategory" class="form-label">Catégorie</label>
+              <select class="form-select" id="docCategory">
+                <option selected disabled value="">Choisir une catégorie...</option>
+                <option>Avis de Cotisation</option>
+                <option>Contrat</option>
+                <option>Correspondance</option>
+                <option>Courriel</option>
+                <option>Déclaration Fiscale</option>
+                <option>Note Fiscale</option>
+                <option>Note Interne</option>
+                <option>Opinion</option>
+                <option>Pièce Justificative</option>
+                <option>Rapport</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="docDescription" class="form-label">Description / Notes</label>
+              <textarea class="form-control" id="docDescription" rows="3" placeholder="Ajouter une brève description ou des notes pertinentes..."></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="docFileUpload" class="form-label">Fichier (optionnel pour l'instant)</label>
+              <input class="form-control" type="file" id="docFileUpload" accept=".pdf,.doc,.docx,.xls,.xlsx,.eml,.zip,.txt,.jpg,.png">
+              <small class="form-text text-muted">Vous pourrez téléverser le fichier après la création des métadonnées.</small>
+            </div>
+            
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary" onclick="saveNewDocument()">Créer le document</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Ajouter Lien -->
+  <div class="modal fade" id="addLinkModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Ajouter un lien externe</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addLinkForm">
+            <div class="mb-3">
+              <label class="form-label">Titre du lien</label>
+              <input type="text" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">URL</label>
+              <input type="url" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Description</label>
+              <textarea class="form-control" rows="2"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary" onclick="addLink()">Ajouter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Éditer Document -->
+  <div class="modal fade" id="editDocumentModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modifier le document</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editDocumentForm">
+            <div class="mb-3">
+              <label class="form-label">Nom du fichier</label>
+              <input type="text" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Description</label>
+              <textarea class="form-control" rows="2"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary" onclick="saveDocumentEdit()">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Compte -->
+  <div class="modal fade" id="accountModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Gestion du compte</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>La gestion du compte sera bientôt disponible.</p>
+          <form>
+            <div class="mb-3">
+              <label for="accountEmail" class="form-label">Courriel</label>
+              <input type="email" class="form-control" id="accountEmail" value="utilisateur@example.com" readonly>
+            </div>
+            <div class="mb-3">
+              <label for="accountName" class="form-label">Nom</label>
+              <input type="text" class="form-control" id="accountName" value="Nom Prénom" readonly>
+            </div>
+            <button type="button" class="btn btn-outline-secondary">Modifier les informations</button>
+            <button type="button" class="btn btn-danger">Se déconnecter</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // quick handler to trigger file input via dropdown label
-    document.getElementById('uploadFile')?.addEventListener('change', e=>{
-      if(e.target.files.length){
-        alert('Fichier "'+e.target.files[0].name+'" sélectionné (upload à implémenter).');
+    // Gestion des documents
+    function showAddLinkModal() {
+      const modal = new bootstrap.Modal(document.getElementById('addLinkModal'));
+      modal.show();
+    }
+
+    function addLink() {
+      // TODO: Implement link addition
+      alert('Ajout de lien à implémenter');
+      const modal = bootstrap.Modal.getInstance(document.getElementById('addLinkModal'));
+      modal.hide();
+    }
+
+    function downloadDocument(btn) {
+      const row = btn.closest('tr');
+      const filename = row.cells[0].textContent;
+      alert(`Téléchargement de ${filename} à implémenter`);
+    }
+
+    function editDocument(btn) {
+      const row = btn.closest('tr');
+      const filename = row.cells[0].textContent;
+      const modal = new bootstrap.Modal(document.getElementById('editDocumentModal'));
+      document.querySelector('#editDocumentForm input').value = filename;
+      modal.show();
+    }
+
+    function saveDocumentEdit() {
+      // TODO: Implement document edit
+      alert('Modification de document à implémenter');
+      const modal = bootstrap.Modal.getInstance(document.getElementById('editDocumentModal'));
+      modal.hide();
+    }
+
+    function deleteDocument(btn) {
+      if (confirm('Êtes-vous sûr de vouloir supprimer ce document ?')) {
+        const row = btn.closest('tr');
+        row.remove();
+      }
+    }
+
+    function generateDocument(type) {
+      alert(`Génération de document de type ${type} à implémenter`);
+    }
+
+    // Gestion du modal de création de document
+    function showCreateDocumentModal() {
+      document.getElementById('createDocumentForm').reset(); // Reset form on show
+      const modal = new bootstrap.Modal(document.getElementById('createDocumentModal'));
+      modal.show();
+    }
+
+    function saveNewDocument() {
+      // TODO: Implement actual document creation and file upload logic
+      const fileName = document.getElementById('docFileName').value;
+      if (fileName) {
+        alert(`Création du document "${fileName}" (logique à implémenter).`);
+        const modal = bootstrap.Modal.getInstance(document.getElementById('createDocumentModal'));
+        modal.hide();
+        // Potentially add the new document to the table here (client-side for now)
+      } else {
+        alert('Veuillez entrer un nom de fichier.');
+      }
+    }
+
+    // Gestion du compte
+    function showAccountModal() {
+      const modal = new bootstrap.Modal(document.getElementById('accountModal'));
+      modal.show();
+    }
+
+    // Gestion du téléversement de fichiers
+    document.getElementById('uploadFileMaster')?.addEventListener('change', e => {
+      if (e.target.files.length) {
+        const file = e.target.files[0];
+        // This is a master uploader, we might want to pass the file to the active modal
+        // For now, just an alert.
+        alert(`Fichier "${file.name}" sélectionné via le téléchargeur maître (logique à implémenter).`);
+        // Example: if createDocumentModal is active, populate its file name
+        if (bootstrap.Modal.getInstance(document.getElementById('createDocumentModal'))?._isShown) {
+          document.getElementById('docFileName').value = file.name;
+          // Or handle the upload directly
+        }
       }
     });
   </script>
