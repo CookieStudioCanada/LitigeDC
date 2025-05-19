@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Dossiers – Litige DC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    html,body{height:100%;background:#f5f6f8}
+    .navbar-brand{font-size:1.5rem;font-weight:600;letter-spacing:.03em;}
+    .compte-btn{border-radius:.5rem;font-weight:500;}
+    .dossiers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
+    .dossier-card{border-radius:.75rem;box-shadow:0 1px 4px rgba(0,0,0,.06);transition:box-shadow .15s,transform .15s;background:#fff;cursor:pointer;min-height:140px;display:flex;flex-direction:column;justify-content:center;align-items:center;}
+    .dossier-card:hover{box-shadow:0 4px 16px rgba(13,110,253,.12);transform:translateY(-2px);border-color:#0d6efd;}
+    .dossier-num{font-size:2.2rem;font-weight:600;color:#0d6efd;}
+    .dossier-label{font-size:1.1rem;color:#374151;}
+    .dossier-plus{font-size:2.5rem;color:#adb5bd;}
+    @media (max-width: 575px) {
+      .navbar-brand{font-size:1.1rem;}
+      .dossier-num{font-size:1.5rem;}
+      .dossier-label{font-size:.95rem;}
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar navbar-light bg-white shadow-sm px-3 sticky-top mb-4">
+    <span class="navbar-brand">Vos dossiers</span>
+    <button class="btn btn-outline-primary compte-btn"><i class="bi bi-person-circle me-1"></i>Compte</button>
+  </header>
+  <div class="container pb-5">
+    <div class="dossiers-grid">
+      <div class="dossier-card" onclick="window.location.href='file.html'">
+        <div class="dossier-num">1</div>
+        <div class="dossier-label">Litige fiscal – ABC inc.</div>
+      </div>
+      <div class="dossier-card" onclick="window.location.href='file.html'">
+        <div class="dossier-num">2</div>
+        <div class="dossier-label">Vérification TPS – M. Dupuis</div>
+      </div>
+      <div class="dossier-card" onclick="window.location.href='file.html'">
+        <div class="dossier-num">3</div>
+        <div class="dossier-label">Opposition – Mme Tremblay</div>
+      </div>
+      <div class="dossier-card dossier-plus" title="Nouveau dossier" onclick="alert('Créer un nouveau dossier (à implémenter)')">
+        <i class="bi bi-plus-lg"></i>
+        <div class="dossier-label">Nouveau dossier</div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
